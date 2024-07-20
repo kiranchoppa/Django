@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 EXTERNAL_APPS = [
     "shopping",
+    "bootstrap3",
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

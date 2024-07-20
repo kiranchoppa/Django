@@ -31,7 +31,10 @@
       </td>
       <td>{{ item.size }}</td>
       <td>{{ item.discription }}</td>
-      <td><a class="btn btn-danger" href="/delete-item/{{item.id}}/">Delete</a></td>
+      <td>
+        <a class="btn btn-danger" href="/delete-item/{{item.id}}/">Delete</a>
+        <a class="btn btn-primary" href="/update-item/{{item.id}}/">Update</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

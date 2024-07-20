@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %}
-    home
+    SignUp
 {% endblock title %}
 
 {% block content %}
 
 <section>
 
-    <h1>Add Items</h1>
+    <h1>Sign Up</h1>
     
-    <form class="form-with-validation" action="/add_page/" method="post" enctype="multipart/form-data">
+    <form class="form-with-validation" action="/signup/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -19,4 +19,3 @@
 </section>
 
 {% endblock content %}
-

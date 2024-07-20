@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Items(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField(default="default.png", blank=True)
+    image = models.ImageField(default="default.png")
     price = models.IntegerField()
     discount = models.FloatField()
     sizes = {
