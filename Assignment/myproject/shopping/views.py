@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Items
 from .forms import AddItem, CreateUserDetails, LogInForm
 import os
-from django.forms import formset_factory
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -17,6 +16,7 @@ def home_page(request):
     return render(request, "shopping/home.html", {"items": items})
 
 
+@login_required(login_url="/login/")
 def add_page(request):
     if request.method == "POST":
         form = AddItem(request.POST, request.FILES)
@@ -123,9 +123,8 @@ def SignUp_page(request):
 def SignUp_page(request):
     if request.method == "POST":
         form = CreateUserDetails(request.POST)
-        print("taking input")
+
         if form.is_valid():
-            print("form is valid")
             username = form.cleaned_data["name"]
             phone_number = form.cleaned_data["phone_number"]
             place = form.cleaned_data["place"]
@@ -147,8 +146,9 @@ def SignUp_page(request):
 
             user.set_password(password)
             user.save()
-            print("user saved")
+
             messages.info(request, "Account created successfully")
+            login(request, user)
             return redirect("/")
     else:
         form = CreateUserDetails()
@@ -157,4 +157,31 @@ def SignUp_page(request):
 
 
 def login_page(request):
-    return render(request, "shopping/login_page.html", {})
+
+    if request.method == "POST":
+        form = LogInForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data["name"]
+            password = form.cleaned_data["password"]
+
+            if not User.objects.filter(username=username).exists():
+                messages.info(request, "Invalid username")
+                return redirect("/login/")
+
+            user = authenticate(username=username, password=password)
+
+            if user is None:
+                messages.info(request, "Invalid password")
+                return redirect("/login/")
+            else:
+                login(request, user)
+                return redirect("/")
+    else:
+        form = LogInForm()
+    return render(request, "shopping/login_page.html", {"form": form})
+
+
+def logout_page(request):
+    logout(request)
+    return redirect("/login/")

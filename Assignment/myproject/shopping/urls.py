@@ -6,6 +6,7 @@ from .views import (
     update_item,
     SignUp_page,
     login_page,
+    logout_page,
 )
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns  # add for image
@@ -21,11 +22,13 @@ urlpatterns = [
     path("update-item/<id>/", update_item, name="update_item"),
     path("signup/", SignUp_page, name="signup_page"),
     path("login/", login_page, name="login_page"),
+    path("logout/", logout_page, name="logout_page"),
 ]
 
 
 # added for image
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

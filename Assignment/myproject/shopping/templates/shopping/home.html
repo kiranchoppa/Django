@@ -13,7 +13,9 @@
       <th scope="col">Price</th>
       <th scope="col">Size</th>
       <th scope="col">Discripiton</th>
-      <th scope="col">Options</th>
+      {% if request.user.is_authenticated %}
+        <th scope="col">Options</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -31,10 +33,12 @@
       </td>
       <td>{{ item.size }}</td>
       <td>{{ item.discription }}</td>
-      <td>
-        <a class="btn btn-danger" href="/delete-item/{{item.id}}/">Delete</a>
-        <a class="btn btn-primary" href="/update-item/{{item.id}}/">Update</a>
-      </td>
+      {% if request.user.is_authenticated %}
+        <td>
+          <a class="btn btn-danger" href="/delete-item/{{item.id}}/">Delete</a>
+          <a class="btn btn-primary" href="/update-item/{{item.id}}/">Update</a>
+        </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>

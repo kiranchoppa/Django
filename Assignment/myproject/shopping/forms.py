@@ -9,13 +9,13 @@ class AddItem(forms.ModelForm):
 
 
 class CreateUserDetails(forms.Form):
-    name = forms.CharField(max_length=50, label="User Name: ")
-    phone_number = forms.IntegerField(label="Pone Number: ")
-    place = forms.CharField(widget=forms.Textarea, label="Address: ")
-    email = forms.EmailField(max_length=50, label="Email: ")
-    password = forms.CharField(widget=forms.PasswordInput, label="Password: ")
+    name = forms.CharField(max_length=50, label="User Name")
+    phone_number = forms.IntegerField(label="Pone Number")
+    place = forms.CharField(widget=forms.Textarea, label="Address")
+    email = forms.EmailField(max_length=50, label="Email")
+    password = forms.CharField(widget=forms.PasswordInput, label="Password")
     confirm_password = forms.CharField(
-        widget=forms.PasswordInput, label="Confirm Password: "
+        widget=forms.PasswordInput, label="Confirm Password"
     )
 
 
